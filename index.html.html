@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cupones de Aniversario</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fff0f5;--ink:#5a3a4e;--mute:#a07890;--pink:#ff8fb1;--card:#fff;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#2a1a28;--ink:#ffe6f0;--mute:#d6a5c0;--card:#3b2538;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#2a1a28;--ink:#ffe6f0;--mute:#d6a5c0;--card:#3b2538;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Fredoka,system-ui,sans-serif;min-height:100vh;overflow-x:hidden;
+ background-image:radial-gradient(circle,rgba(255,143,177,.25) 2px,transparent 2.5px);background-size:26px 26px}
+main{max-width:560px;margin:0 auto;padding:30px 14px 60px}
+header{text-align:center;margin-bottom:28px}
+header .sp{color:var(--pink);letter-spacing:.4em;font-size:1rem}
+h1{font-size:2.2rem;line-height:1.1;margin:6px 0 8px;font-weight:700}
+h1 em{font-style:normal;color:var(--pink)}
+header p{color:var(--mute);margin:0 auto;max-width:42ch;line-height:1.45}
+header p+p{margin-top:12px}
+.cond{background:var(--card);border:2.5px dashed var(--pink);border-radius:20px;padding:14px 18px;margin:0 0 26px;font-size:.88rem;line-height:1.4}
+.cond b{display:block;color:var(--pink);margin-bottom:4px;letter-spacing:.04em}
+footer{text-align:center;color:var(--mute);font-size:.85rem;margin-top:26px}
+
+/* ---- cupón ---- */
+.cp{position:relative;display:flex;margin-bottom:20px}
+.main,.stub{position:relative;transition:transform .8s cubic-bezier(.3,1.5,.5,1),filter .6s,opacity .6s;filter:drop-shadow(0 5px 0 rgba(90,58,78,.18))}
+.main{flex:1;min-width:0;display:flex;align-items:center;gap:12px;padding:20px 22px 20px 18px;background:var(--c1);color:var(--ink-c);border-radius:24px 0 0 24px;min-height:150px;
+ -webkit-mask:radial-gradient(circle 6px at 100% 50%,#0000 97%,#000) 0 0/100% 16px repeat-y;mask:radial-gradient(circle 6px at 100% 50%,#0000 97%,#000) 0 0/100% 16px repeat-y}
+.main::before{content:"";position:absolute;inset:7px 9px 7px 7px;border:2.5px dashed var(--bd);border-radius:18px 0 0 18px;opacity:.55;pointer-events:none}
+.stub{flex:0 0 108px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;padding:14px 8px;background:var(--c2);color:var(--ink-c);border-radius:0 24px 24px 0;transform-origin:0 0;text-align:center;
+ -webkit-mask:radial-gradient(circle 6px at 0 50%,#0000 97%,#000) 0 0/100% 16px repeat-y;mask:radial-gradient(circle 6px at 0 50%,#0000 97%,#000) 0 0/100% 16px repeat-y}
+.art{flex:0 0 78px}.art svg{width:100%;height:auto;display:block}
+.txt{min-width:0}
+.tag{display:inline-block;font-size:.66rem;font-weight:600;background:rgba(255,255,255,.65);padding:2px 9px;border-radius:99px;margin-bottom:5px}
+.txt h2{margin:0 0 4px;font-size:1.15rem;line-height:1.15;font-weight:700}
+.txt p{margin:0;font-size:.82rem;line-height:1.35;opacity:.85}
+.lbl{font-size:.62rem;font-weight:600;letter-spacing:.12em;opacity:.7}
+.big{font-size:1.9rem;font-weight:700;line-height:1}
+.pun{display:flex;gap:4px;flex-wrap:wrap;justify-content:center;max-width:84px}
+.pn{width:15px;height:15px;border-radius:50%;border:2.5px solid var(--bd);background:rgba(255,255,255,.6)}
+.pn.used{background:var(--bd)}
+.pn.just{animation:stampin .5s cubic-bezier(.2,1.8,.4,1)}
+@keyframes stampin{from{transform:scale(3);opacity:0}}
+button.redeem{border:0;border-radius:99px;padding:9px 14px;font:600 .85rem Fredoka,sans-serif;cursor:pointer;background:var(--bb);color:#fff;box-shadow:0 3px 0 rgba(0,0,0,.2)}
+button.redeem:active{transform:translateY(3px);box-shadow:none}
+
+/* ---- rotura ---- */
+.cp.shake{animation:shake .45s linear}
+@keyframes shake{10%,50%,90%{transform:translateX(-3px) rotate(-.8deg)}30%,70%{transform:translateX(3px) rotate(.8deg)}}
+.cp.torn{margin-bottom:46px}
+.cp.torn .main{transform:translate(-4px,0) rotate(-1.2deg);filter:grayscale(.7) drop-shadow(0 3px 0 rgba(90,58,78,.18));opacity:.8}
+.cp.torn .stub{transform:translate(12px,30px) rotate(10deg);filter:grayscale(.8) drop-shadow(0 3px 0 rgba(90,58,78,.18));opacity:.7}
+.stamp{position:absolute;left:30%;top:80%;transform:translate(-50%,-50%) rotate(-10deg);z-index:5;pointer-events:none;border:3.5px dashed #ff4d7e;color:#ff4d7e;background:rgba(255,255,255,.92);font:700 1.05rem Fredoka,sans-serif;letter-spacing:.06em;padding:3px 12px;border-radius:16px;animation:pop .45s cubic-bezier(.2,1.6,.4,1)}
+@keyframes pop{from{transform:translate(-50%,-50%) rotate(-10deg) scale(2.4);opacity:0}}
+
+/* ---- temas (pasteles) ---- */
+.k-gold{--c1:linear-gradient(135deg,#fff3b0,#ffd966 60%,#ffe9a0);--c2:#ffcf4d;--ink-c:#6a4a10;--bd:#c58f1c;--bb:#e0881f}
+.k-gold .main{min-height:190px}.k-gold .art{flex-basis:92px}.k-gold h2{font-size:1.2rem}
+.k-gold .main::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.7) 50%,transparent 65%);transform:translateX(-120%);animation:shine 4.5s ease-in-out infinite;pointer-events:none}
+@keyframes shine{60%,100%{transform:translateX(120%)}}
+.k-lol{--c1:#cfe8ff;--c2:#9fd0ff;--ink-c:#27466e;--bd:#4a8fd6;--bb:#3f86d6}
+.k-repo{--c1:#fff2a8;--c2:#ffe066;--ink-c:#5c4a10;--bd:#d6a915;--bb:#4a3042}
+.k-terror{--c1:#c9b8f5;--c2:#a58be8;--ink-c:#2f1f5a;--bd:#5b3fb0;--bb:#5b3fb0}
+.k-masaje{--c1:#d4f5e4;--c2:#a8e6c8;--ink-c:#2c5a45;--bd:#4aa57e;--bb:#3f9b73}
+.k-comodin{--c1:#ffd6e8;--c2:#ffb3d1;--ink-c:#6e2a50;--bd:#e0558f;--bb:#e0558f}
+.main{background:var(--c1)}
+
+/* ---- modal ---- */
+.modal{position:fixed;inset:0;background:rgba(90,40,70,.5);display:none;align-items:center;justify-content:center;padding:24px;z-index:20}
+.modal.open{display:flex}
+.sheet{background:var(--card);border-radius:28px;padding:26px;max-width:340px;width:100%;text-align:center;box-shadow:0 8px 0 rgba(255,143,177,.6)}
+.sheet h3{font-size:1.3rem;margin:0 0 8px}
+.sheet p{color:var(--mute);margin:0 0 18px;line-height:1.4}
+.sheet .btns{display:flex;gap:10px}
+.sheet button{flex:1;padding:12px;border-radius:99px;border:2.5px solid var(--pink);font:600 .95rem Fredoka,sans-serif;background:transparent;color:var(--ink);cursor:pointer}
+.sheet button.ok{background:var(--pink);color:#fff}
+canvas{position:fixed;inset:0;pointer-events:none;z-index:30}
+@media (max-width:380px){.art{flex-basis:60px}.k-gold .art{flex-basis:96px}.stub{flex-basis:92px}.txt h2{font-size:1.02rem}}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="sp">✦ ✧ ✦</div>
+    <h1>Cupones para <em>mi chiquito</em></h1>
+    <p>Primero que nada, feliz aniversario, mi chiquito!!! Te quiero mucho, mi niño. Gracias por haber compartido un mes más conmigo: experiencias, situaciones, conversaciones, y espero que podamos seguirlo haciendo.</p><p>Y dicho esto, quiero darte unos cupones jiji. Puedes canjearlos hasta el próximo aniversario, así que tómalos muy en cuenta.</p>
+  </header>
+  <div class="cond"><b>Condiciones de uso</b>El cupón se puede canjear y se cumplirá lo antes posible, siempre que horarios y tiempos lo permitan.</div>
+  <section id="list"></section>
+  <footer>Hecho con cariño ♥</footer>
+</main>
+
+<div class="modal" id="modal"><div class="sheet">
+  <h3 id="mTitle"></h3>
+  <p>¿Segura que quieres canjearlo ahora? Esto no se puede deshacer.</p>
+  <div class="btns"><button id="no">Todavía no</button><button class="ok" id="yes">¡Romperlo!</button></div>
+</div></div>
+<canvas id="fx"></canvas>
+
+<script>
+/* EDITA AQUÍ los cupones. uses = cuántas veces se puede canjear. */
+var COUPONS = [
+  {id:"gold",theme:"gold",title:"Colada morada y guagua de pan",desc:"Una colada morada y guagua de pan, puede ser del Cyrano o de la cafetería de su elección.",uses:1,conf:["#ffd966","#ffb3d1","#b57edc","#fff"]},
+  {id:"lol",theme:"lol",title:"Una partida de LoL",desc:"TÉRMINOS Y CONDICIONES IMPORTANTES: no se vale flamear o funarme por no saber jugar tan bien xd. Vale para una partida normal, Aram, o el modo de juego que usted quiera.",uses:3,conf:["#9fd0ff","#cfe8ff","#fff","#ffb3d1"]},
+  {id:"repo",theme:"repo",title:"Partida de R.E.P.O.",desc:"Una partida juntos, pero sin shusheos.",uses:1,conf:["#ffe066","#fff2a8","#4a3042","#fff"]},
+  {id:"terror",theme:"terror",title:"Noche de terror",desc:"Películas a su elección, ya sea si vemos en persona o de manera online.",uses:5,conf:["#a58be8","#c9b8f5","#fff","#ffb3d1"]},
+  {id:"masaje",theme:"masaje",title:"Masaje de 15 minutos",desc:"Se harán las mejores técnicas posibles con aceites esenciales jsjsjs y piojitos incluidos.",uses:2,conf:["#a8e6c8","#d4f5e4","#fff","#ffd966"]},
+  {id:"comodin",theme:"comodin",title:"Hoy tú mandas",desc:"Tú decides el plan y yo no discuto.",uses:1,conf:["#ffb3d1","#ffd6e8","#ffd966","#fff"]}
+];
+
+function F(x,y){return '<circle cx="'+(x-8)+'" cy="'+y+'" r="2.8" fill="#4a3042"/><circle cx="'+(x+8)+'" cy="'+y+'" r="2.8" fill="#4a3042"/><ellipse cx="'+(x-13)+'" cy="'+(y+5)+'" rx="4" ry="2.6" fill="#ff8fab" opacity=".75"/><ellipse cx="'+(x+13)+'" cy="'+(y+5)+'" rx="4" ry="2.6" fill="#ff8fab" opacity=".75"/><path d="M'+(x-3)+' '+(y+4)+'q3 3.5 6 0" stroke="#4a3042" stroke-width="1.9" fill="none" stroke-linecap="round"/>';}
+var ART={
+gold:'<svg viewBox="0 0 140 100">'+
+ '<g fill="none" stroke="#fff" stroke-opacity=".9" stroke-width="3" stroke-linecap="round"><path d="M26 30q-5-7 0-12t0-9"/><path d="M42 30q-5-7 0-12t0-9"/></g>'+
+ '<path d="M60 52q17 0 17 13t-17 13" stroke="#b57edc" stroke-width="7" fill="none" stroke-linecap="round"/>'+
+ '<path d="M10 40h52v28q0 22-26 22T10 68z" fill="#b57edc"/><ellipse cx="36" cy="40" rx="26" ry="6.5" fill="#8e55c4"/><ellipse cx="36" cy="40" rx="21" ry="4" fill="#5a2d82"/>'+F(36,66)+
+ '<g><path d="M86 56q17-9 34 0l-3 32q-14 8-28 0z" fill="#e8b27a"/><path d="M89 68l28-5M90 78l26-5" stroke="#ffb3d1" stroke-width="4" stroke-linecap="round"/>'+
+ '<circle cx="103" cy="40" r="17" fill="#f1c294"/>'+F(103,42)+'<path d="M90 58q13 9 26 0" stroke="#fff3d6" stroke-width="5" fill="none" stroke-linecap="round"/></g></svg>',
+lol:'<svg viewBox="0 0 100 100"><path d="M24 36l4-16 14 10zM76 36l-4-16-14 10z" fill="#6db3f2"/><ellipse cx="50" cy="60" rx="33" ry="28" fill="#8ecbff"/>'+F(50,60)+
+ '<g transform="rotate(30 82 62)"><rect x="79" y="30" width="6" height="30" rx="3" fill="#fff" stroke="#4a3042" stroke-width="1.5"/><rect x="73" y="58" width="18" height="5" rx="2.5" fill="#ffd966"/><rect x="80" y="63" width="4" height="10" fill="#c58f1c"/></g></svg>',
+repo:'<svg viewBox="0 0 100 100"><line x1="50" y1="24" x2="50" y2="12" stroke="#4a3042" stroke-width="3" stroke-linecap="round"/><circle cx="50" cy="10" r="5" fill="#ff8fab"/>'+
+ '<rect x="12" y="46" width="9" height="22" rx="4.5" fill="#ffcf4d"/><rect x="79" y="46" width="9" height="22" rx="4.5" fill="#ffcf4d"/>'+
+ '<rect x="20" y="24" width="60" height="58" rx="20" fill="#fff" stroke="#4a3042" stroke-width="2.5"/><rect x="28" y="36" width="44" height="28" rx="12" fill="#4a3042"/>'+
+ '<circle cx="41" cy="50" r="5" fill="#ffe066"/><circle cx="59" cy="50" r="5" fill="#ffe066"/><path d="M46 58q4 3 8 0" stroke="#ffe066" stroke-width="2" fill="none" stroke-linecap="round"/><ellipse cx="27" cy="70" rx="4" ry="2.5" fill="#ff8fab" opacity=".7"/><ellipse cx="73" cy="70" rx="4" ry="2.5" fill="#ff8fab" opacity=".7"/></svg>',
+terror:'<svg viewBox="0 0 100 100"><path d="M22 88V46a28 28 0 0 1 56 0v42l-9-8-9 8-10-8-10 8-9-8z" fill="#fff" stroke="#5b3fb0" stroke-width="2.5" stroke-linejoin="round"/>'+F(50,50)+
+ '<ellipse cx="50" cy="63" rx="4" ry="3.5" fill="#4a3042"/><text x="8" y="22" font-size="14" fill="#fff">✦</text><text x="80" y="30" font-size="11" fill="#fff">✧</text></svg>',
+masaje:'<svg viewBox="0 0 100 100"><ellipse cx="50" cy="78" rx="38" ry="14" fill="#7fcfa8"/><ellipse cx="50" cy="60" rx="28" ry="12" fill="#a8e6c8"/><ellipse cx="50" cy="44" rx="18" ry="9" fill="#c9f2de"/>'+
+ F(50,62)+'<path d="M60 34q2-20 22-20q0 20-22 20z" fill="#5fc08f"/></svg>',
+comodin:'<svg viewBox="0 0 100 100"><path d="M50 8l13 26 29 4-21 20 5 29-26-14-26 14 5-29L8 38l29-4z" fill="#ffd966" stroke="#e0a82a" stroke-width="3" stroke-linejoin="round"/>'+F(50,52)+'</svg>'
+};
+
+var KEY="cupones-aniversario-v3";
+var state={};
+try{state=JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){state={}}
+if(location.hash==="#reset"){try{localStorage.removeItem(KEY)}catch(e){}state={};try{history.replaceState(null,"",location.pathname)}catch(e){}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+function used(id){return state[id]||0}
+var list=document.getElementById("list"),modal=document.getElementById("modal"),pending=null,justId=null;
+
+function build(c){
+  var u=used(c.id),left=c.uses-u,done=left<=0,pun="";
+  if(c.uses>1){pun='<div class="pun">';for(var k=0;k<c.uses;k++){pun+='<span class="pn'+(k<u?' used':'')+(justId===c.id&&k===u-1?' just':'')+'"></span>'}pun+='</div>'}
+  var btn=done?'':'<button class="redeem" data-id="'+c.id+'">Canjear</button>';
+  return '<div class="main"><div class="art">'+ART[c.theme]+'</div><div class="txt"><h2>'+c.title+'</h2><p>'+c.desc+'</p></div></div>'+
+   '<div class="stub"><div class="lbl">'+(c.uses>1?"USOS":"VALE")+'</div><div class="big">'+(c.uses>1?left+"/"+c.uses:"1")+'</div>'+pun+btn+'</div>'+
+   (done?'<div class="stamp">CANJEADO</div>':'');
+}
+function render(){
+  list.innerHTML="";
+  COUPONS.forEach(function(c){
+    var el=document.createElement("article");
+    el.className="cp k-"+c.theme+(used(c.id)>=c.uses?" torn":"");
+    el.setAttribute("data-id",c.id);
+    el.innerHTML=build(c);
+    list.appendChild(el);
+  });
+  justId=null;
+}
+function find(id){return COUPONS.filter(function(c){return c.id===id})[0]}
+list.addEventListener("click",function(e){
+  var b=e.target.closest?e.target.closest("button.redeem"):null;if(!b)return;
+  pending=find(b.getAttribute("data-id"));
+  document.getElementById("mTitle").textContent=pending.title;
+  modal.classList.add("open");
+});
+document.getElementById("no").onclick=function(){modal.classList.remove("open");pending=null};
+document.getElementById("yes").onclick=function(){
+  var c=pending;if(!c)return;
+  modal.classList.remove("open");pending=null;
+  state[c.id]=used(c.id)+1;save();
+  var el=document.querySelector('.cp[data-id="'+c.id+'"]');
+  try{if(navigator.vibrate)navigator.vibrate([40,30,80])}catch(e){}
+  el.classList.add("shake");
+  if(used(c.id)>=c.uses){
+    setTimeout(function(){
+      el.classList.remove("shake");el.classList.add("torn");
+      var b=el.querySelector("button.redeem");if(b)b.remove();
+      var s=document.createElement("div");s.className="stamp";s.textContent="CANJEADO";el.appendChild(s);
+      confetti(c.conf,el,120);
+    },450);
+  }else{
+    justId=c.id;
+    setTimeout(function(){render();confetti(c.conf,document.querySelector('.cp[data-id="'+c.id+'"]'),40)},400);
+  }
+};
+function confetti(cols,el,n){
+  var cv=document.getElementById("fx"),x=cv.getContext("2d");
+  cv.width=innerWidth;cv.height=innerHeight;
+  var r=el.getBoundingClientRect(),cx=r.left+r.width*.75,cy=r.top+r.height/2,ps=[];
+  for(var i=0;i<n;i++)ps.push({x:cx,y:cy,vx:(Math.random()-.5)*14,vy:-Math.random()*11-3,s:4+Math.random()*5,c:cols[Math.floor(Math.random()*cols.length)]});
+  var t=0;(function f(){x.clearRect(0,0,cv.width,cv.height);
+    ps.forEach(function(p){p.vy+=.35;p.x+=p.vx;p.y+=p.vy;x.fillStyle=p.c;x.beginPath();x.arc(p.x,p.y,p.s/1.6,0,6.3);x.fill()});
+    if(++t<100)requestAnimationFrame(f);else x.clearRect(0,0,cv.width,cv.height)})();
+}
+render();
+</script>
+</body>
+</html>
